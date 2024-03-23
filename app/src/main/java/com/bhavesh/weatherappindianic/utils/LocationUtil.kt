@@ -13,10 +13,7 @@ import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.location.SettingsClient
 import android.content.ContentValues.TAG
-import android.location.Address
-import android.location.Geocoder
 import com.bhavesh.weatherappindianic.livedata.LocationLiveData
-import java.util.Locale
 
 class LocationUtil(private val context: Context) {
 
@@ -33,17 +30,17 @@ class LocationUtil(private val context: Context) {
     }
 
 
-    fun turnGPSOn(OnGpsListener: OnLocationOnListener?) {
+    fun turnGPSOn(onGpsListener: OnLocationOnListener?) {
 
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            OnGpsListener?.locationStatus(true)
+            onGpsListener?.locationStatus(true)
         } else {
             if (locationSettingsRequest != null) {
                 settingsClient
                     .checkLocationSettings(locationSettingsRequest)
                     .addOnSuccessListener(context as Activity) {
                         // GPS enabled already
-                        OnGpsListener?.locationStatus(true)
+                        onGpsListener?.locationStatus(true)
                     }
                     .addOnFailureListener(context) { e ->
                         when ((e as ApiException).statusCode) {

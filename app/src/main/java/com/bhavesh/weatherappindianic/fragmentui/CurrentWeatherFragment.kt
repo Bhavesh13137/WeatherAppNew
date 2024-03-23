@@ -101,7 +101,7 @@ class CurrentWeatherFragment : Fragment() {
         viewModel.listWeather.observe(viewLifecycleOwner){
             hideNewProgress()
             weatherCity.text = it.name
-            todayTitle.text = it.dt?.let { a -> ConvertDate().getDateString(a) }
+            todayTitle.text = it.dt?.let { a -> ConvertDate.getDateString(a) }
             minTemp.text = it.main?.temp_min.toString()
             maxTemp.text = it.main?.temp_max.toString()
             humidity.text = it.main?.humidity.toString()

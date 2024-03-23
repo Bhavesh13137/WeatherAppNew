@@ -52,10 +52,10 @@ class MapActivity : AppCompatActivity() {
 
         btnChoose.setOnClickListener {
             val intent = Intent(this,ChooseActivity::class.java)
-            intent.putExtra("address", ConvertDate().getAddress(lat!!,long!!,this))
+            intent.putExtra("address", ConvertDate.getAddress(lat!!,long!!,this))
             intent.putExtra("lat",lat!!)
             intent.putExtra("long",long!!)
-            intent.putExtra("city", ConvertDate().getCity(lat!!, long!!,this))
+            intent.putExtra("city", ConvertDate.getCity(lat!!, long!!,this))
             startActivity(intent)
         }
     }
@@ -71,7 +71,7 @@ class MapActivity : AppCompatActivity() {
                 val markerOptions = MarkerOptions().position(sydney).title("Marker in Sydney").draggable(true)
                 markerCenter = googleMap.addMarker(markerOptions)!!
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15f))
-                txtAddress.text = ConvertDate().getAddress(sydney.latitude,sydney.longitude,this)
+                txtAddress.text = ConvertDate.getAddress(sydney.latitude,sydney.longitude,this)
             }
 
             googleMap.setOnCameraIdleListener {
@@ -81,15 +81,13 @@ class MapActivity : AppCompatActivity() {
                     val markerOptions = MarkerOptions().position(target).title("Marker in New Position").draggable(true)
                     markerCenter = googleMap.addMarker(markerOptions)!!
                     sydney = markerCenter.position
-                    txtAddress.text = ConvertDate().getAddress(target.latitude,target.longitude,this)
+                    txtAddress.text = ConvertDate.getAddress(target.latitude,target.longitude,this)
                     lat = target.latitude
                     long = target.longitude
                 }
             }
         })
     }
-
-
 
 
     override fun onStart() {

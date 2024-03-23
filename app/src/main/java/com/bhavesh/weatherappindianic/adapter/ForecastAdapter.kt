@@ -41,7 +41,7 @@ class ForecastAdapter() : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val weatherName = itemViewModels[position]
 
-        holder.wedate.text = ConvertDate().getDate2String(weatherName.dt!!)
+        holder.wedate.text = ConvertDate.getDate2String(weatherName.dt!!)
 
         val iconUrl = Constant.imageUrl.plus(weatherName.weather?.get(0)?.icon.toString()).plus(".png")
         Glide.with(holder.welogo.context)
