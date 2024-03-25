@@ -13,6 +13,8 @@ import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.location.SettingsClient
 import android.content.ContentValues.TAG
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import com.bhavesh.weatherappindianic.livedata.LocationLiveData
 
 class LocationUtil(private val context: Context) {
@@ -27,6 +29,28 @@ class LocationUtil(private val context: Context) {
         val builder = LocationSettingsRequest.Builder().addLocationRequest(LocationLiveData.locationRequest)
         locationSettingsRequest = builder.build()
         builder.setAlwaysShow(true)
+    }
+
+    fun isOnline(): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                    return true
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                    return true
+                }
+            }
+        }
+        return false
     }
 
 
