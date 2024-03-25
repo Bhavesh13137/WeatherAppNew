@@ -71,7 +71,8 @@ class MapActivity : AppCompatActivity() {
                 val markerOptions = MarkerOptions().position(sydney).title("Marker in Sydney").draggable(true)
                 markerCenter = googleMap.addMarker(markerOptions)!!
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15f))
-                txtAddress.text = ConvertDate.getAddress(sydney.latitude,sydney.longitude,this)
+                txtAddress.text = ConvertDate.getAddress(sydney.latitude,sydney.longitude,applicationContext)
+                println("Address1 "+ ConvertDate.getAddress(sydney.latitude,sydney.longitude,applicationContext))
             }
 
             googleMap.setOnCameraIdleListener {
@@ -81,7 +82,8 @@ class MapActivity : AppCompatActivity() {
                     val markerOptions = MarkerOptions().position(target).title("Marker in New Position").draggable(true)
                     markerCenter = googleMap.addMarker(markerOptions)!!
                     sydney = markerCenter.position
-                    txtAddress.text = ConvertDate.getAddress(target.latitude,target.longitude,this)
+                    println("Address2 "+ ConvertDate.getAddress(target.latitude,target.longitude,applicationContext))
+                    txtAddress.text = ConvertDate.getAddress(target.latitude,target.longitude,applicationContext)
                     lat = target.latitude
                     long = target.longitude
                 }

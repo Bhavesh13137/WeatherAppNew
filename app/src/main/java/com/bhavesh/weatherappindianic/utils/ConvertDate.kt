@@ -30,15 +30,7 @@ class ConvertDate {
 
         private fun getListOfAddress(latitude: Double, longitude: Double, context: Context): List<Address>? {
             val geocoder = Geocoder(context, Locale.getDefault())
-            var addresses: List<Address>? = null
-            if (Build.VERSION.SDK_INT >= 33) {
-                geocoder.getFromLocation(latitude, longitude, 1) {
-                    addresses = it
-                }
-            }else {
-                addresses = geocoder.getFromLocation(latitude, longitude, 1)
-            }
-            return addresses
+            return geocoder.getFromLocation(latitude, longitude, 1)
         }
 
         fun celsiusToFahrenheit(celsius: Double): Double {
