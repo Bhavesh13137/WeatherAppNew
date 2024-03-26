@@ -1,7 +1,6 @@
 package com.bhavesh.weatherappindianic.fragmentui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bhavesh.weatherappindianic.R
 import com.bhavesh.weatherappindianic.factory.WeatherViewModelFactory
@@ -19,6 +19,7 @@ import com.bhavesh.weatherappindianic.utils.Constant
 import com.bhavesh.weatherappindianic.utils.ConvertDate
 import com.bhavesh.weatherappindianic.view_model.WeatherViewModel
 import com.bumptech.glide.Glide
+import java.text.DecimalFormat
 
 private const val ARG_PARAM1 = "address"
 private const val ARG_PARAM2 = "lat"
@@ -106,11 +107,8 @@ class CurrentWeatherFragment : Fragment() {
             maxTemp.text = it.main?.temp_max.toString()
             humidity.text = it.main?.humidity.toString()
             desc.text = it.weather?.get(0)?.description
-            //val fahrenheit = (it.main?.temp!! * 9/5) + 32
-            //val celsius = (it.main?.temp!! - 32) * 5 / 9
-            temp.text = it.main?.temp.toString() //celsius.toString().plus("°C")
+            temp.text = it.main?.temp!!.toString().plus("°C")
             val imageUrl = Constant.imageUrl.plus(it.weather?.get(0)?.icon.toString()).plus(".png")
-            println("URL : $imageUrl")
             Glide.with(icon.context).load(imageUrl).into(icon)
         }
     }

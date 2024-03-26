@@ -21,11 +21,11 @@ class ConvertDate {
         fun getDate2String(time: Int): String = simpleDateFormat2.format(time * 1000L)
 
         fun getAddress(latitude: Double, longitude: Double, context: Context): String? {
-            return getListOfAddress(latitude,longitude,context)?.get(0)?.getAddressLine(0)
+            return getListOfAddress(latitude,longitude,context)?.get(0)?.getAddressLine(0).toString()
         }
 
         fun getCity(latitude: Double, longitude: Double, context: Context): String? {
-            return getListOfAddress(latitude,longitude,context)?.get(0)?.locality
+            return getListOfAddress(latitude,longitude,context)?.get(0)?.locality.toString()
         }
 
         private fun getListOfAddress(latitude: Double, longitude: Double, context: Context): List<Address>? {

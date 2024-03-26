@@ -11,12 +11,12 @@ import com.bhavesh.weatherappindianic.utils.LocationUtil
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_splash)
 
-        Handler(Looper.getMainLooper())
+        /*Handler(Looper.getMainLooper())
             .postDelayed({
                 getNext()
-        },2000)
+        },2000)*/
     }
 
     private fun getNext(){
